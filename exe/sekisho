@@ -4,18 +4,15 @@ require 'yaml'
 require 'date'
 require 'logger'
 
-def repositories
-  yaml = YAML.load_file('github_repositories.yml')
-  return yaml['repository']
-end
+yaml = YAML.load_file('sekisho_config.yml')
+
+repositories = yaml['repositories']
 
 cm = Sekisho::Milestone.new
 
-THURSDAY_WDAY = 4
-
 target_milestones = []
 for i in 0..3 do
-  target_milestones << cm.get_next_week(Date.today.next_day(i * 7), THURSDAY_WDAY)
+  target_milestones << cm.get_next_week(Date.today.next_day(i * 7), base_wday)
 end
 
 repositories.each do |repo|
