@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'next day of week' do
-  let(:cm) { Sekisho::Milestone.new }
+  let(:cm) { Sekisho::Create.new({}) }
 
   context 'Base week: Thu' do
     it 'Mon' do
