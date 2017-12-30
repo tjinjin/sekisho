@@ -1,32 +1,4 @@
 #!/usr/bin/env ruby
-require 'sekisho'
-require 'yaml'
-require 'date'
-require 'logger'
 
-yaml = YAML.load_file('sekisho_config.yml')
-
-repositories = yaml['repositories']
-
-cm = Sekisho::Milestone.new
-
-target_milestones = []
-for i in 0..3 do
-  target_milestones << cm.get_next_week(Date.today.next_day(i * 7), base_wday)
-end
-
-repositories.each do |repo|
-  logger.info("repository: #{repo}")
-  open_milestones = []
-  cm.list_milestones(repo).each do |mile|
-    begin
-      open_milestones << Date.strptime(mile[:title])
-    rescue
-      next
-    end
-  end
-
-  (target_milestones - open_milestones).each do |mile|
-    cm.create_milestone(repo, mile)
-  end
-end
+require 'sekisho/cli'
+Sekisho::CLI.start(ARGV)

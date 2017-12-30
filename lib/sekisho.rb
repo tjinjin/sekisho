@@ -1,6 +1,7 @@
+require "sekisho/log"
+require "sekisho/base"
+require "sekisho/cli"
+require "sekisho/create"
+require "sekisho/github_milestone"
 require "sekisho/version"
-require "sekisho/create_milestone"
-
-module Sekisho
-  # Your code goes here...
-end
+require "sekisho/string-ext"
