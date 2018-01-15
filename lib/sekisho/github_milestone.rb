@@ -6,6 +6,7 @@ module Sekisho
     class Milestone
       def initialize
         @client = Octokit::Client.new(:access_token => ENV['GITHUB_ACCESS_TOKEN'])
+        @client.auto_paginate = true
       end
 
       def list_milestones(repo, state)
