@@ -17,5 +17,13 @@ module Sekisho
     def create
       Sekisho::Create.new(options).run
     end
+
+    desc 'close milestone', 'close milestone.'
+    option :to, aliases: 't', default: Date.today.strftime("%Y-%m-%d"), desc: 'until when will it be closed'
+    option :dry_run, aliases: 'n', type: :boolean, default: false, desc: 'dry-run option'
+
+    def close
+      Sekisho::Close.new(options).run
+    end
   end
 end

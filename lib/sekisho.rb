@@ -1,6 +1,7 @@
 require "sekisho/log"
 require "sekisho/base"
 require "sekisho/cli"
+require "sekisho/close"
 require "sekisho/create"
 require "sekisho/github_milestone"
 require "sekisho/version"

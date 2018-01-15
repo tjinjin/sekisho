@@ -24,6 +24,25 @@ module Sekisho
         }
         resp = @client.create_milestone(repo, target_day.strftime(format = '%Y-%m-%d'), options)
       end
+
+      def close_milestone(repo, milestone_number)
+        options = {
+          state: 'closed'
+        }
+        @client.update_milestone(repo, milestone_number, options)
+      end
+
+      def list_issues(repo, milestone_number)
+        options = {
+          state: 'open',
+          milestone: milestone_number
+        }
+        @client.list_issues(repo, options)
+      end
+
+      def open_issues?(repo, milestone_number)
+        list_issues(repo, milestone_number).blank?
+      end
     end
   end
 end
