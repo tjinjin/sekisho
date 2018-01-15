@@ -19,8 +19,8 @@ module Sekisho
 
     def create_milestones_list(base_day, cycle, base_wday, count)
       tmp_list = []
-      for i in 0..count do
-        tmp_list << get_next_week(base_day.next_day(i * cycle * 7), base_wday)
+      (0..count).each do |num|
+        tmp_list << get_next_week(base_day.next_day(num * cycle * 7), base_wday)
       end
       return tmp_list
     end
