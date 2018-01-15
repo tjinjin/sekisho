@@ -27,7 +27,7 @@ module Sekisho
 
     def run
       base_wday = options[:week]
-      count = options[:count]
+      count = options[:count] - 1
       base_day = Date.strptime(options[:from], '%Y-%m-%d')
       dry_run = options[:dry_run]
       cycle = options[:interval]
