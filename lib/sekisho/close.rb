@@ -4,7 +4,6 @@ module Sekisho
 
     def initialize(options)
       super(options)
-      @github = Sekisho::Github::Milestone.new
     end
 
     def find_milestone_number(list, milestone)

@@ -10,6 +10,8 @@ module Sekisho
       @repositories = yaml['repositories']
       @logger = Logger.new(STDOUT)
       @options = option
+      api_key = yaml['api_key'] if yaml.has_key?('api_key')
+      @github = Sekisho::Github::Milestone.new(api_key)
     end
 
     def dry_run?

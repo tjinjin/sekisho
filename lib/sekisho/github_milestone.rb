@@ -4,9 +4,13 @@ require 'date'
 module Sekisho
   module Github
     class Milestone
-      def initialize
-        @client = Octokit::Client.new(:access_token => ENV['GITHUB_ACCESS_TOKEN'])
+      def initialize(api_key)
+        @client = Octokit::Client.new(access_token: api_key)
         @client.auto_paginate = true
+      end
+
+      def api_key
+        api_key || ENV['GITHUB_ACCESS_TOKEN']
       end
 
       def list_milestones(repo, state)
