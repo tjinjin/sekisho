@@ -5,12 +5,9 @@ module Sekisho
   module Github
     class Milestone
       def initialize(api_key)
-        @client = Octokit::Client.new(access_token: api_key)
+        @api_key = github_api_key(api_key)
+        @client = Octokit::Client.new(api_key: @api_key)
         @client.auto_paginate = true
-      end
-
-      def api_key
-        api_key || ENV['GITHUB_ACCESS_TOKEN']
       end
 
       def list_milestones(repo, state)
@@ -46,6 +43,24 @@ module Sekisho
 
       def open_issues?(repo, milestone_number)
         list_issues(repo, milestone_number).blank?
+      end
+
+      private
+
+      def github_api_key(api_key)
+        @api_key ||=
+          case
+          when ENV['GITHUB_ACCESS_TOKEN']
+          when api_key
+          else
+            puts <<-MESSAGE
+Can't find github access token.
+Please set api key.
+  - sekisho_config.yml api_key: xxxxxxxxxxxxxxxx
+  - Enviroment variables export GITHUB_ACCESS_TOKEN=xxxxxxxxxxxxxxxx
+            MESSAGE
+            exit
+          end
       end
     end
   end
