@@ -3,7 +3,7 @@ module Sekisho
 
     def log(level, message)
       message = "#{message}"
-      message << '(dry-run)' if dry_run?
+      message << ' (dry-run)' if dry_run?
       logger.log(convert(level), colorize(level, message))
     end
 
