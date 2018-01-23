@@ -19,7 +19,6 @@ module Sekisho
       def create_milestone(repo, target_day)
         options = {
           :state => "open",
-          :description => "#{target_day.strftime(format = '%Y-%m-%d')}",
           # Github supports iso8601 https://developer.github.com/v3/issues/milestones/#create-a-milestone
           :due_on =>target_day.to_time.iso8601
         }
