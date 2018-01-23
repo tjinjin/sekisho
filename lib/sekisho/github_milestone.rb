@@ -6,7 +6,7 @@ module Sekisho
     class Milestone
       def initialize(api_key)
         @api_key = github_api_key(api_key)
-        @client = Octokit::Client.new(api_key: @api_key)
+        @client = Octokit::Client.new(access_token: @api_key)
         @client.auto_paginate = true
       end
 
