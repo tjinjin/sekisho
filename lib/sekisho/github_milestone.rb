@@ -51,7 +51,9 @@ module Sekisho
         @api_key ||=
           case
           when ENV['GITHUB_ACCESS_TOKEN']
+            return ENV['GITHUB_ACCESS_TOKEN']
           when api_key
+            return api_key
           else
             puts <<-MESSAGE
 Can't find github access token.
