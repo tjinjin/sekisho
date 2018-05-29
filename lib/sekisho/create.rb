@@ -34,18 +34,19 @@ module Sekisho
       target_milestones = create_milestones_list(base_day, cycle, base_wday, count)
 
       @repositories.each do |repo|
-        open_milestones = []
-        github.list_milestones(repo, 'open').each do |mile|
-          begin
-            open_milestones << Date.strptime(mile[:title])
-          rescue
-            next
+        exist_milestones = []
+        %w(open closed).each do |state|
+          github.list_milestones(repo, state).each do |mile|
+            begin
+              exist_milestones << Date.strptime(mile[:title])
+            rescue
+              next
+            end
           end
         end
 
-
-        log(:warn, "No Changed: repo: [#{repo}]") if (target_milestones - open_milestones).blank?
-        (target_milestones - open_milestones).each do |mile|
+        log(:warn, "No Changed: repo: [#{repo}]") if (target_milestones - exist_milestones).blank?
+        (target_milestones - exist_milestones).each do |mile|
           msg = "repo: [#{repo}] -> #{mile.strftime('%Y-%m-%d')}"
           log(:debug, msg)
           github.create_milestone(repo, mile) unless dry_run?
