@@ -32,6 +32,10 @@ module Sekisho
         @client.update_milestone(repo, milestone_number, options)
       end
 
+      def delete_milestone(repo, milestone_number)
+        @client.delete_milestone(repo, milestone_number)
+      end
+
       def list_issues(repo, milestone_number)
         options = {
           state: 'open',

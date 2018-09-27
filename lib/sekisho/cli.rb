@@ -25,5 +25,12 @@ module Sekisho
     def close
       Sekisho::Close.new(options).run
     end
+
+    desc 'delete milestone', 'delete milestone.'
+    option :title, aliases: 't', required: true, desc: 'specify delete milestone title'
+    option :dry_run, aliases: 'n', type: :boolean, default: false, desc: 'dry-run option'
+    def delete
+      Sekisho::Delete.new(options).run
+    end
   end
 end
