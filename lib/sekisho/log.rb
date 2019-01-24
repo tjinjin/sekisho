@@ -5,6 +5,9 @@ module Sekisho
       message = "#{message}"
       message << ' (dry-run)' if dry_run?
       logger.log(convert(level), colorize(level, message))
+      if level == :fatal
+        exit 1
+      end
     end
 
     def convert(level)
