@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'next day of week' do
-  let(:cm) { Sekisho::Create.new({}) }
+  let(:cm) { Sekisho::Create.new({ config: 'sekisho_config.yml' }) }
 
   context 'Base week: Thu' do
     it 'Mon' do
