@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'octokit'
   spec.add_dependency 'thor'
   spec.add_dependency 'term-ansicolor'
+  spec.add_dependency 'slack-notifier'
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
