@@ -3,6 +3,7 @@ module Sekisho
     attr_reader :github
 
     def initialize(options)
+      @slack = Sekisho::Notify.new if options[:notify]
       super(options)
     end
 
@@ -57,6 +58,7 @@ module Sekisho
             log(:info, "Closed milestone: [#{repo}] milestone: [#{mile.strftime('%Y-%m-%d')}]")
           else
             log(:warn, "Not closed: open issues associated. repo: [#{repo}] milestone: [#{mile.strftime('%Y-%m-%d')}]")
+            @slack.post({repo:repo, milestone:mile, milestone_number:milestone_number, mode:"close"}) unless @slack.nil?
           end
         end
       end

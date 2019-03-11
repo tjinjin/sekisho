@@ -23,6 +23,7 @@ module Sekisho
     option :to, aliases: 't', default: Date.today.strftime("%Y-%m-%d"), desc: 'until when will it be closed'
     option :dry_run, aliases: 'n', type: :boolean, default: false, desc: 'dry-run option'
     option :config, default: "sekisho_config.yml", desc: 'specify config file'
+    option :notify, type: :boolean, default: false, desc: 'notify error if can\'t close milestone'
 
     def close
       Sekisho::Close.new(options).run
